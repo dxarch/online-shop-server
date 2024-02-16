@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  pgAdmin:
+    image: 'dpage/pgadmin4:latest'
+    restart: always
+    depends_on:
+      - database
+    ports:
+      - '82:80'
+    env_file:
+      - .env
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+  database:
+    image: 'postgres:latest'
+    restart: always
+    ports:
+      - '5432:5432'
+    env_file:
+      - .env
+    volumes:
+      - db-data:/var/lib/postgresql/data
+volumes:
+  db-data:
+  pgadmin-data:
+
